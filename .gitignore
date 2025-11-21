@@ -1,24 +1,13 @@
 # Python
-venv/
-__pycache__/
-*.pyc
+backend/venv/
+backend/__pycache__/
+backend/uploads/
+backend/*.db
 
 # Node
-node_modules/
-dist/
-.env
-.env.local
-.vscode/
-
-# Backend storage & keys
-backend/uploads/
-backend/issuer_priv.pem
-backend/chain.db
-
-# Frontend generated
 frontend/node_modules/
 frontend/dist/
 
-# OS
+# OS junk
 .DS_Store
 Thumbs.db
