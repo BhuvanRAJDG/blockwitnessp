@@ -1,0 +1,24 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Node
+node_modules/
+dist/
+.env
+.env.local
+.vscode/
+
+# Backend storage & keys
+backend/uploads/
+backend/issuer_priv.pem
+backend/chain.db
+
+# Frontend generated
+frontend/node_modules/
+frontend/dist/
+
+# OS
+.DS_Store
+Thumbs.db
