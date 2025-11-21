@@ -493,5 +493,5 @@ def chain_timeline():
     return jsonify(blocks)
 
 if __name__ == "__main__":
-    # listen on all interfaces for LAN testing; change host if you prefer localhost only
-    app.run(host="0.0.0.0", port=5001, debug=True)
+    init_db()
+    app.run(host="127.0.0.1", port=5001, debug=True)
