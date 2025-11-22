@@ -1,3 +1,8 @@
+@app.get("/")
+def home():
+    return {"status": "BlockWitness backend running successfully!"}
+
+
 # backend/app.py
 import os
 import time
