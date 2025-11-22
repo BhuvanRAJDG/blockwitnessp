@@ -22,13 +22,13 @@ args = "Start application"
 name = "Start application"
 author = "agent"
 
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "cd frontend && npm run dev"
-waitForPort = 5000
-
 [workflows.workflow.metadata]
 outputType = "webview"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python main.py & cd frontend && npm run dev"
+waitForPort = 5000
 
 [[ports]]
 localPort = 5000
@@ -41,6 +41,10 @@ externalPort = 8000
 [[ports]]
 localPort = 33101
 externalPort = 3000
+
+[[ports]]
+localPort = 37287
+externalPort = 3001
 
 [deployment]
 deploymentTarget = "autoscale"

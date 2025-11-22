@@ -78,9 +78,9 @@ export default function FileUpload({
   };
 
   return (
-    <div className={`space-y-3 ${className}`}>
+    <div className={`space-y-3 animate-fade-in-up ${className}`}>
       {label && (
-        <label className="block text-sm font-medium text-dark-700">
+        <label className="block text-sm font-semibold text-dark-200 mb-2">
           {label}
         </label>
       )}
@@ -90,8 +90,8 @@ export default function FileUpload({
           relative border-2 border-dashed rounded-2xl p-8
           transition-all duration-500 cursor-pointer
           ${dragActive 
-            ? 'border-primary-500 bg-gradient-to-br from-primary-50 to-secondary-50 scale-105 shadow-glow' 
-            : 'border-dark-300 hover:border-primary-400 hover:bg-gradient-to-br hover:from-primary-50/30 hover:to-secondary-50/30 hover:scale-[1.02]'
+            ? 'border-neon-cyan bg-dark-800/80 scale-105 shadow-glow backdrop-blur-sm' 
+            : 'border-dark-700 hover:border-primary-600 hover:bg-dark-800/50 hover:scale-[1.02] backdrop-blur-sm'
           }
         `}
         onDragEnter={handleDrag}
@@ -117,10 +117,10 @@ export default function FileUpload({
           </div>
           
           <div>
-            <p className="text-lg font-semibold text-dark-900">
+            <p className="text-lg font-semibold text-dark-100">
               Drop files here or click to browse
             </p>
-            <p className="text-sm text-dark-500 mt-1">
+            <p className="text-sm text-dark-400 mt-1">
               {multiple ? 'Upload multiple files' : 'Upload a single file'}
               {maxSize && ` (max ${maxSize}MB)`}
             </p>
@@ -134,11 +134,11 @@ export default function FileUpload({
 
       {files.length > 0 && (
         <div className="space-y-2 animate-slide-up">
-          <p className="text-sm font-medium text-dark-700">
+          <p className="text-sm font-semibold text-dark-200">
             Selected Files ({files.length})
           </p>
           {files.map((file, index) => (
-            <div key={index} className="flex items-center justify-between p-3 bg-gradient-to-r from-primary-50/50 to-secondary-50/50 rounded-xl border border-primary-200/50 group hover:border-primary-300 hover:shadow-sm transition-all duration-300 animate-slide-up">
+            <div key={index} className="flex items-center justify-between p-3 bg-dark-800/70 rounded-xl border border-dark-700/50 group hover:border-primary-600 hover:shadow-glow transition-all duration-300 animate-slide-up backdrop-blur-sm">
               <div className="flex items-center gap-3 flex-1 min-w-0">
                 <div className="w-10 h-10 bg-gradient-to-br from-primary-500 via-secondary-500 to-accent-500 rounded-lg flex items-center justify-center flex-shrink-0 shadow-sm group-hover:shadow-glow transition-all duration-300">
                   <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -146,14 +146,14 @@ export default function FileUpload({
                   </svg>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-dark-900 truncate">{file.name}</p>
-                  <p className="text-xs text-dark-500">{(file.size / 1024).toFixed(1)} KB</p>
+                  <p className="text-sm font-medium text-dark-100 truncate">{file.name}</p>
+                  <p className="text-xs text-dark-400">{(file.size / 1024).toFixed(1)} KB</p>
                 </div>
               </div>
               <button
                 type="button"
                 onClick={(e) => { e.stopPropagation(); removeFile(index); }}
-                className="ml-3 p-2 text-dark-400 hover:text-danger-600 hover:bg-danger-50 rounded-lg transition-all duration-300 hover:scale-110 active:scale-95"
+                className="ml-3 p-2 text-dark-400 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all duration-300 hover:scale-110 active:scale-95"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />

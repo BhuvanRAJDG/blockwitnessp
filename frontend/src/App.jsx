@@ -19,18 +19,18 @@ function NavLink({ to, children, icon }) {
         group overflow-hidden
         ${isActive 
           ? 'text-white bg-gradient-primary shadow-button scale-105' 
-          : 'text-dark-600 hover:text-primary-600 hover:bg-gradient-to-r hover:from-primary-50 hover:to-secondary-50 hover:scale-105'
+          : 'text-dark-300 hover:text-neon-cyan hover:bg-dark-800/50 hover:scale-105 hover:shadow-glow'
         }
         active:scale-95
       `}
     >
       {!isActive && (
-        <span className="absolute inset-0 bg-gradient-to-r from-primary-500/0 via-primary-500/20 to-secondary-500/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></span>
+        <span className="absolute inset-0 bg-gradient-to-r from-primary-500/0 via-neon-cyan/20 to-secondary-500/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></span>
       )}
-      {icon && <span className="relative z-10 transition-transform group-hover:scale-110">{icon}</span>}
+      {icon && <span className="relative z-10 transition-transform group-hover:scale-110 group-hover:rotate-6">{icon}</span>}
       <span className="relative z-10">{children}</span>
       {isActive && (
-        <span className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-white/60 via-white/80 to-white/60 rounded-full"></span>
+        <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-neon-cyan/60 via-neon-cyan to-neon-cyan/60 rounded-full shadow-glow"></span>
       )}
     </Link>
   );
@@ -38,21 +38,21 @@ function NavLink({ to, children, icon }) {
 
 function AppContent() {
   return (
-    <div className="min-h-screen bg-gradient-mesh bg-dark-50 animate-fade-in">
-      <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-xl border-b border-gradient-to-r from-primary-200/30 via-secondary-200/30 to-accent-200/30 shadow-lg shadow-primary-500/5">
+    <div className="min-h-screen bg-gradient-mesh bg-dark-950 animate-fade-in">
+      <nav className="sticky top-0 z-50 bg-dark-900/80 backdrop-blur-xl border-b border-primary-800/20 shadow-lg">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3 group cursor-pointer">
-              <div className="w-11 h-11 bg-gradient-to-br from-primary-500 via-secondary-500 to-accent-500 rounded-xl flex items-center justify-center shadow-glow transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 group-hover:shadow-glow-lg animate-pulse-scale">
+              <div className="w-11 h-11 bg-gradient-to-br from-primary-500 via-secondary-500 to-accent-500 rounded-xl flex items-center justify-center shadow-glow transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 group-hover:shadow-glow-lg">
                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
               </div>
               <div>
-                <h1 className="text-xl font-extrabold bg-gradient-to-r from-primary-500 via-secondary-500 to-accent-500 bg-clip-text text-transparent animate-gradient-shift bg-[length:200%_auto]">
+                <h1 className="text-xl font-extrabold gradient-text">
                   BlockWitness
                 </h1>
-                <p className="text-xs text-dark-500 font-medium">Tamper-Proof Evidence Recorder</p>
+                <p className="text-xs text-dark-400 font-medium">Tamper-Proof Evidence Recorder</p>
               </div>
             </div>
             

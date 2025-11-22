@@ -96,10 +96,10 @@ export default function Explorer() {
     <div className="space-y-6 animate-fade-in-up">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-5xl font-extrabold bg-gradient-to-r from-primary-500 via-secondary-500 to-accent-500 bg-clip-text text-transparent">
+          <h1 className="text-5xl font-extrabold gradient-text">
             Block Explorer
           </h1>
-          <p className="text-dark-600 mt-2 text-lg font-medium">
+          <p className="text-dark-300 mt-2 text-lg font-medium">
             Explore the blockchain and verify evidence integrity
           </p>
         </div>
@@ -114,7 +114,7 @@ export default function Explorer() {
 
       <div className="grid grid-cols-12 gap-6">
         <div className="col-span-4 space-y-3 max-h-[800px] overflow-y-auto pr-2">
-          <h2 className="text-lg font-semibold text-dark-900 mb-3 flex items-center gap-2">
+          <h2 className="text-lg font-semibold text-dark-100 mb-3 flex items-center gap-2">
             <svg className="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
             </svg>
@@ -143,7 +143,7 @@ export default function Explorer() {
                 <div className="flex items-start justify-between mb-3">
                   <div>
                     <div className="flex items-center gap-2 mb-1">
-                      <h3 className="font-bold text-dark-900">Block #{b.idx}</h3>
+                      <h3 className="font-bold text-dark-100">Block #{b.idx}</h3>
                       <Badge variant="primary" size="sm">
                         {b.tx_count || 0} tx
                       </Badge>
@@ -170,7 +170,7 @@ export default function Explorer() {
           {detail ? (
             <GlassCard className="p-6 space-y-6 animate-slide-up">
               <div>
-                <h2 className="text-2xl font-bold text-dark-900 mb-4 flex items-center gap-3">
+                <h2 className="text-2xl font-bold text-dark-100 mb-4 flex items-center gap-3">
                   <span className="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center text-white font-bold shadow-lg shadow-primary-500/30">
                     {detail.idx}
                   </span>
@@ -179,26 +179,26 @@ export default function Explorer() {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <p className="text-sm font-medium text-dark-600 mb-1">Timestamp</p>
-                    <p className="text-sm font-mono text-dark-900 bg-dark-50 px-3 py-2 rounded-lg border border-dark-200">
+                    <p className="text-sm font-medium text-dark-300 mb-1">Timestamp</p>
+                    <p className="text-sm font-mono text-dark-100 bg-dark-800 px-3 py-2 rounded-lg border border-dark-700">
                       {detail.timestamp}
                     </p>
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-dark-600 mb-1">Previous Hash</p>
-                    <p className="text-xs font-mono text-dark-900 bg-dark-50 px-3 py-2 rounded-lg border border-dark-200 truncate">
+                    <p className="text-sm font-medium text-dark-300 mb-1">Previous Hash</p>
+                    <p className="text-xs font-mono text-dark-100 bg-dark-800 px-3 py-2 rounded-lg border border-dark-700 truncate">
                       {detail.previous_hash || 'genesis'}
                     </p>
                   </div>
                   <div className="col-span-2">
-                    <p className="text-sm font-medium text-dark-600 mb-1">Block Hash</p>
-                    <p className="text-xs font-mono text-dark-900 bg-dark-50 px-3 py-2 rounded-lg border border-dark-200 break-all">
+                    <p className="text-sm font-medium text-dark-300 mb-1">Block Hash</p>
+                    <p className="text-xs font-mono text-dark-100 bg-dark-800 px-3 py-2 rounded-lg border border-dark-700 break-all">
                       {detail.block_hash}
                     </p>
                   </div>
                   <div className="col-span-2">
-                    <p className="text-sm font-medium text-dark-600 mb-1">Merkle Root</p>
-                    <p className="text-xs font-mono text-dark-900 bg-dark-50 px-3 py-2 rounded-lg border border-dark-200 break-all">
+                    <p className="text-sm font-medium text-dark-300 mb-1">Merkle Root</p>
+                    <p className="text-xs font-mono text-dark-100 bg-dark-800 px-3 py-2 rounded-lg border border-dark-700 break-all">
                       {detail.merkle_root}
                     </p>
                   </div>
@@ -206,14 +206,14 @@ export default function Explorer() {
               </div>
 
               <div>
-                <h3 className="text-lg font-bold text-dark-900 mb-3">Transactions</h3>
+                <h3 className="text-lg font-bold text-dark-100 mb-3">Transactions</h3>
                 <div className="space-y-3">
                   {detail.transactions.map(tx => (
                     <Card key={tx.tx_id} className="p-4" hover>
                       <div className="flex items-start justify-between mb-3">
                         <div className="flex-1">
-                          <h4 className="font-semibold text-dark-900 mb-1">{tx.title}</h4>
-                          <div className="flex flex-wrap gap-2 text-xs text-dark-600">
+                          <h4 className="font-semibold text-dark-100 mb-1">{tx.title}</h4>
+                          <div className="flex flex-wrap gap-2 text-xs text-dark-300">
                             <Badge variant="dark" size="sm">
                               {tx.uploader}
                             </Badge>
@@ -238,8 +238,8 @@ export default function Explorer() {
                     </Card>
                   ))}
 
-                  <div className="mt-4 p-4 bg-dark-50 rounded-xl border border-dark-200">
-                    <h4 className="text-sm font-semibold text-dark-900 mb-3">Generate Merkle Proof</h4>
+                  <div className="mt-4 p-4 bg-dark-800 rounded-xl border border-dark-700">
+                    <h4 className="text-sm font-semibold text-dark-100 mb-3">Generate Merkle Proof</h4>
                     <div className="flex gap-2">
                       <Input
                         placeholder="Paste leaf hash (optional, leave empty for all)"
@@ -265,13 +265,13 @@ export default function Explorer() {
 
               {qrData && (
                 <Card className="p-6 bg-gradient-to-br from-dark-50 to-white">
-                  <h4 className="font-semibold text-dark-900 mb-4">QR Code Verification</h4>
+                  <h4 className="font-semibold text-dark-100 mb-4">QR Code Verification</h4>
                   <div className="flex items-center gap-6">
-                    <div className="p-4 bg-white rounded-2xl shadow-lg border-2 border-dark-200">
+                    <div className="p-4 bg-white rounded-2xl shadow-lg border-2 border-dark-700">
                       <img alt="qr" src={`data:image/png;base64,${qrData.qr_base64}`} className="w-48 h-48" />
                     </div>
                     <div className="flex-1">
-                      <p className="text-sm text-dark-600 mb-2">Scan this QR code or visit:</p>
+                      <p className="text-sm text-dark-300 mb-2">Scan this QR code or visit:</p>
                       <a
                         className="text-primary-600 hover:text-primary-700 underline font-mono text-sm break-all"
                         href={qrData.verification_url}
@@ -292,8 +292,8 @@ export default function Explorer() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-dark-900 mb-2">Select a Block</h3>
-              <p className="text-dark-600">
+              <h3 className="text-xl font-semibold text-dark-100 mb-2">Select a Block</h3>
+              <p className="text-dark-300">
                 Click on any block from the list to view its details, transactions, and verification information.
               </p>
             </Card>
@@ -304,22 +304,22 @@ export default function Explorer() {
       {showMerkle && proofData && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-6 z-50 animate-fade-in">
           <GlassCard className="p-8 max-w-3xl w-full max-h-[90vh] overflow-y-auto animate-scale-in">
-            <h3 className="text-2xl font-bold text-dark-900 mb-4">Merkle Proof Verification</h3>
+            <h3 className="text-2xl font-bold text-dark-100 mb-4">Merkle Proof Verification</h3>
             <div className="mb-6 space-y-2">
               <div>
-                <span className="text-sm font-medium text-dark-600">Leaf Hash:</span>
-                <code className="block mt-1 px-3 py-2 bg-dark-50 rounded-lg text-xs font-mono text-dark-900 border border-dark-200 break-all">
+                <span className="text-sm font-medium text-dark-300">Leaf Hash:</span>
+                <code className="block mt-1 px-3 py-2 bg-dark-800 rounded-lg text-xs font-mono text-dark-100 border border-dark-700 break-all">
                   {proofData.leaf}
                 </code>
               </div>
               <div>
-                <span className="text-sm font-medium text-dark-600">Root Hash:</span>
-                <code className="block mt-1 px-3 py-2 bg-dark-50 rounded-lg text-xs font-mono text-dark-900 border border-dark-200 break-all">
+                <span className="text-sm font-medium text-dark-300">Root Hash:</span>
+                <code className="block mt-1 px-3 py-2 bg-dark-800 rounded-lg text-xs font-mono text-dark-100 border border-dark-700 break-all">
                   {proofData.root}
                 </code>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-sm font-medium text-dark-600">Status:</span>
+                <span className="text-sm font-medium text-dark-300">Status:</span>
                 <Badge variant={proofData.valid ? "success" : "danger"} size="md">
                   {proofData.valid ? "✓ Valid" : "✗ Invalid"}
                 </Badge>
@@ -359,8 +359,8 @@ export default function Explorer() {
               </svg>
             </div>
             <div className="flex-1">
-              <h3 className="font-bold text-lg text-dark-900 mb-2">Chain Verification Result</h3>
-              <pre className="text-sm bg-white px-4 py-3 rounded-lg border border-dark-200 overflow-x-auto">
+              <h3 className="font-bold text-lg text-dark-100 mb-2">Chain Verification Result</h3>
+              <pre className="text-sm bg-white px-4 py-3 rounded-lg border border-dark-700 overflow-x-auto">
                 {JSON.stringify(chainStatus, null, 2)}
               </pre>
             </div>

@@ -30,7 +30,7 @@ export default function Search() {
         <h1 className="text-5xl font-extrabold bg-gradient-to-r from-primary-500 via-secondary-500 to-accent-500 bg-clip-text text-transparent">
           Search Reports
         </h1>
-        <p className="text-dark-600 text-lg font-medium">
+        <p className="text-dark-300 text-lg font-medium">
           Find reports by title, uploader, transaction ID, or block number
         </p>
       </div>
@@ -73,8 +73,8 @@ export default function Search() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
-          <h3 className="text-lg font-semibold text-dark-900 mb-2">No Results Found</h3>
-          <p className="text-dark-600">
+          <h3 className="text-lg font-semibold text-dark-100 mb-2">No Results Found</h3>
+          <p className="text-dark-300">
             Try searching with different keywords or check the blockchain explorer.
           </p>
         </Card>
@@ -83,7 +83,7 @@ export default function Search() {
       {results.length > 0 && (
         <div className="space-y-4 animate-slide-up">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg font-semibold text-dark-900">
+            <h2 className="text-lg font-semibold text-dark-100">
               Found {results.length} {results.length === 1 ? 'result' : 'results'}
             </h2>
           </div>
@@ -97,9 +97,9 @@ export default function Search() {
                   </svg>
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-xl font-bold text-dark-900 mb-2">{r.title}</h3>
+                  <h3 className="text-xl font-bold text-dark-100 mb-2">{r.title}</h3>
                   {r.description && (
-                    <p className="text-dark-600 mb-4">{r.description}</p>
+                    <p className="text-dark-300 mb-4">{r.description}</p>
                   )}
                   <div className="flex flex-wrap gap-2">
                     <Badge variant="primary" size="sm" className="flex items-center gap-1">
@@ -129,8 +129,8 @@ export default function Search() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           </div>
-          <h3 className="text-xl font-semibold text-dark-900 mb-2">Search the Blockchain</h3>
-          <p className="text-dark-600 max-w-md mx-auto">
+          <h3 className="text-xl font-semibold text-dark-100 mb-2">Search the Blockchain</h3>
+          <p className="text-dark-300 max-w-md mx-auto">
             Enter keywords to search through all recorded reports, evidence, and transactions on the blockchain.
           </p>
         </Card>

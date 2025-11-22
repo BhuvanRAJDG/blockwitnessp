@@ -16,9 +16,9 @@ export default function Button({
     secondary: 'bg-gradient-secondary text-white shadow-glow-secondary hover:shadow-glow-secondary hover:scale-105 active:scale-95 hover:brightness-110',
     accent: 'bg-gradient-accent text-white shadow-glow-accent hover:shadow-glow-accent hover:scale-105 active:scale-95 hover:brightness-110',
     success: 'bg-gradient-success text-white shadow-glow-success hover:shadow-glow-success hover:scale-105 active:scale-95 hover:brightness-110',
-    ghost: 'bg-dark-100/50 hover:bg-gradient-to-r hover:from-primary-500/10 hover:to-secondary-500/10 text-dark-700 backdrop-blur-sm border border-dark-200 hover:border-primary-400 hover:scale-105 active:scale-95',
-    outline: 'border-2 border-primary-500 text-primary-600 hover:bg-primary-50 hover:border-primary-600 hover:scale-105 active:scale-95',
-    danger: 'bg-gradient-to-r from-danger-600 to-danger-500 text-white shadow-lg shadow-danger-500/30 hover:shadow-xl hover:shadow-danger-500/40 hover:scale-105 active:scale-95 hover:brightness-110',
+    ghost: 'bg-dark-800/50 hover:bg-gradient-to-r hover:from-primary-500/10 hover:to-secondary-500/10 text-dark-200 backdrop-blur-sm border border-dark-700 hover:border-primary-400 hover:scale-105 active:scale-95',
+    outline: 'border-2 border-primary-500 text-primary-400 hover:bg-primary-900/20 hover:border-primary-600 hover:scale-105 active:scale-95',
+    danger: 'bg-gradient-to-r from-red-600 to-red-500 text-white shadow-lg shadow-red-500/30 hover:shadow-xl hover:shadow-red-500/40 hover:scale-105 active:scale-95 hover:brightness-110',
   };
   
   const sizes = {

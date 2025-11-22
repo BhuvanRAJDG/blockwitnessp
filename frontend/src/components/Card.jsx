@@ -8,10 +8,10 @@ export default function Card({
   gradient = false,
   ...props 
 }) {
-  const baseStyles = 'bg-white rounded-2xl shadow-card transition-all duration-500 border border-dark-100/50 backdrop-blur-sm animate-fade-in-up';
-  const hoverStyles = hover ? 'hover:shadow-card-hover hover:-translate-y-2 hover:border-primary-300/50 cursor-pointer card-interactive' : '';
-  const glowStyles = glow ? 'shadow-glow hover:shadow-glow-lg animate-pulse-glow' : '';
-  const gradientStyles = gradient ? 'bg-gradient-to-br from-white via-white to-primary-50/40 border-primary-200/30' : '';
+  const baseStyles = 'bg-dark-800/90 rounded-2xl shadow-lg transition-all duration-500 border border-dark-700/50 backdrop-blur-sm animate-fade-in-up';
+  const hoverStyles = hover ? 'hover:shadow-glow hover:-translate-y-2 hover:border-primary-600/50 cursor-pointer card-interactive' : '';
+  const glowStyles = glow ? 'shadow-glow hover:shadow-glow-lg' : '';
+  const gradientStyles = gradient ? 'bg-gradient-to-br from-dark-800 via-dark-800 to-primary-900/20 border-primary-700/30' : '';
   
   return (
     <div 
@@ -26,7 +26,7 @@ export default function Card({
 export function GlassCard({ children, className = '', ...props }) {
   return (
     <div 
-      className={`bg-white/80 backdrop-blur-xl rounded-2xl shadow-glass border border-white/30 transition-all duration-500 hover:bg-white/90 hover:shadow-card-hover animate-fade-in-up ${className}`}
+      className={`glass rounded-2xl shadow-lg transition-all duration-500 hover:border-primary-600/30 animate-fade-in-up ${className}`}
       {...props}
     >
       {children}

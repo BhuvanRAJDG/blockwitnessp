@@ -40,7 +40,7 @@ export default function Verify() {
         <h1 className="text-5xl font-extrabold bg-gradient-to-r from-primary-500 via-secondary-500 to-accent-500 bg-clip-text text-transparent">
           Verify Evidence
         </h1>
-        <p className="text-dark-600 text-lg font-medium">
+        <p className="text-dark-300 text-lg font-medium">
           Check if your file exists in the blockchain and verify its authenticity
         </p>
       </div>
@@ -106,7 +106,7 @@ export default function Verify() {
               }`}>
                 {isVerified ? '✓ File Verified' : '⚠ File Not Found'}
               </h2>
-              <p className="text-dark-600 mb-6">
+              <p className="text-dark-300 mb-6">
                 {isVerified 
                   ? 'This file exists in the blockchain and has not been tampered with.' 
                   : 'This file was not found in the blockchain or has been modified.'}
@@ -116,13 +116,13 @@ export default function Verify() {
                 <div className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <p className="text-sm font-medium text-dark-600 mb-2">File Hash</p>
-                      <code className="block px-3 py-2 bg-white rounded-lg text-xs font-mono text-dark-700 border border-dark-200 break-all">
+                      <p className="text-sm font-medium text-dark-300 mb-2">File Hash</p>
+                      <code className="block px-3 py-2 bg-white rounded-lg text-xs font-mono text-dark-200 border border-dark-700 break-all">
                         {result.match.hash}
                       </code>
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-dark-600 mb-2">Block Index</p>
+                      <p className="text-sm font-medium text-dark-300 mb-2">Block Index</p>
                       <Badge variant="accent" size="lg" className="text-base">
                         #{result.match.block_index}
                       </Badge>
@@ -131,7 +131,7 @@ export default function Verify() {
 
                   {result.match.report_id && (
                     <div>
-                      <p className="text-sm font-medium text-dark-600 mb-2">Report ID</p>
+                      <p className="text-sm font-medium text-dark-300 mb-2">Report ID</p>
                       <Badge variant="primary" size="lg" className="font-mono">
                         {result.match.report_id}
                       </Badge>
@@ -140,29 +140,29 @@ export default function Verify() {
 
                   {result.match.title && (
                     <div>
-                      <p className="text-sm font-medium text-dark-600 mb-2">Report Title</p>
+                      <p className="text-sm font-medium text-dark-300 mb-2">Report Title</p>
                       <p className="text-base text-dark-800 font-medium">{result.match.title}</p>
                     </div>
                   )}
 
                   {result.match.uploader && (
                     <div>
-                      <p className="text-sm font-medium text-dark-600 mb-2">Submitted By</p>
+                      <p className="text-sm font-medium text-dark-300 mb-2">Submitted By</p>
                       <p className="text-base text-dark-800">{result.match.uploader}</p>
                     </div>
                   )}
 
                   {result.match.timestamp && (
                     <div>
-                      <p className="text-sm font-medium text-dark-600 mb-2">Timestamp</p>
+                      <p className="text-sm font-medium text-dark-300 mb-2">Timestamp</p>
                       <p className="text-base text-dark-800 font-mono">{result.match.timestamp}</p>
                     </div>
                   )}
 
                   {result.match.merkle_root && (
                     <div>
-                      <p className="text-sm font-medium text-dark-600 mb-2">Merkle Root</p>
-                      <code className="block px-3 py-2 bg-white rounded-lg text-xs font-mono text-dark-700 border border-dark-200 break-all">
+                      <p className="text-sm font-medium text-dark-300 mb-2">Merkle Root</p>
+                      <code className="block px-3 py-2 bg-white rounded-lg text-xs font-mono text-dark-200 border border-dark-700 break-all">
                         {result.match.merkle_root}
                       </code>
                     </div>
@@ -211,8 +211,8 @@ export default function Verify() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <h3 className="text-lg font-semibold text-dark-900">How Verification Works</h3>
-            <p className="text-dark-600 max-w-2xl mx-auto">
+            <h3 className="text-lg font-semibold text-dark-100">How Verification Works</h3>
+            <p className="text-dark-300 max-w-2xl mx-auto">
               Upload any file to compute its SHA-256 hash and compare it against all evidence stored in the blockchain. If a match is found, the file's authenticity is confirmed and you'll see all related metadata.
             </p>
           </div>
