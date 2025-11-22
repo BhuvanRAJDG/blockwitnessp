@@ -38,26 +38,30 @@ BlockWitness is a blockchain-based evidence verification system that creates imm
 
 ## Design System
 
-### Color Palette
-- **Primary**: Purple-blue gradient (#8B5CF6 to #6366F1)
-- **Accent**: Cyan (#06B6D4)
-- **Success**: Emerald (#10B981)
-- **Danger**: Red (#EF4444)
+### Color Palette (Updated November 2025)
+- **Primary**: Vibrant Cyan (#06B6D4) - Modern, energetic, tech-forward
+- **Secondary**: Rich Purple (#A855F7) - Sophisticated, futuristic
+- **Accent**: Bold Pink/Red (#FF3B71) - Eye-catching, dynamic
+- **Success**: Fresh Emerald (#10B981) - Positive, reassuring
+- **Warning**: Bright Orange (#F97316) - Attention-grabbing
 - **Dark Grays**: 50-900 scale for typography and backgrounds
 
 ### UI Components
-- **Button**: 4 variants (primary, secondary, success, danger) with hover effects, icons, and loading states
-- **Card**: Glass-morphism effects with backdrop blur and subtle borders
-- **Input/TextArea**: Modern focus states with ring effects and error handling
-- **Badge**: Compact pill design for tags and labels
-- **FileUpload**: Drag-and-drop with animated states and file previews
+- **Button**: 5 variants (primary, secondary, accent, success, danger) with gradient backgrounds, ripple effects, scale animations on hover, icon support, and loading states
+- **Card**: Glass-morphism effects with backdrop blur, enhanced hover animations (scale + shadow), and GlassCard variant
+- **Input/TextArea**: Modern focus states with glow effects, ring animations, scale transitions, error handling
+- **Badge**: Compact pill design with vibrant colors for tags and labels
+- **FileUpload**: Controlled component with gradient backgrounds, drag-and-drop, animated states, file previews, and proper state management
 
 ### Design Principles
+- Vibrant, modern color palette with electric/neon tones
 - Glass-morphism effects with backdrop-blur
-- Smooth gradient backgrounds
+- Multi-color gradient backgrounds (primary → secondary → accent)
+- Smooth animations: fade-in-up, scale, pulse, glow effects
 - 200-300ms transitions for micro-interactions
+- Reduced-motion support for accessibility
 - High contrast minimalist design
-- Inspired by Apple, Linear, and Notion aesthetics
+- Inspired by modern tech aesthetics (Apple, Linear, Notion, Stripe)
 
 ## Development Setup
 
@@ -127,15 +131,20 @@ Configured for VM deployment:
 
 ## Recent Changes
 
-- 2025-11-22: Complete UI/UX Redesign
-  - Implemented modern design system with futuristic color palette
-  - Created comprehensive component library (Button, Card, Input, Badge, FileUpload)
-  - Redesigned all pages with glass-morphism effects and smooth animations
-  - Added micro-interactions and motion design throughout
-  - Implemented controlled FileUpload component with proper state management
-  - Fixed Merkle proof functionality in Explorer
-  - Enhanced file verification flow with proper reset behavior
-  - Applied Apple/Linear/Notion-inspired design principles
+- 2025-11-22: Vibrant UI Revamp
+  - **Backend fixes**: Resolved all LSP errors in backend/app.py (reportlab type checking)
+  - **New color palette**: Vibrant cyan (primary), rich purple (secondary), bold pink/red (accent), fresh emerald (success), bright orange (warning)
+  - **Tailwind enhancements**: Added gradient utilities, enhanced shadows, animation keyframes (fade-in, fade-in-up, slide-up, pulse-scale, float, glow), safelist for custom gradient classes
+  - **Component updates**: 
+    - Button: New gradient variants, ripple effects, scale hover animations
+    - Card: Enhanced hover effects, fade-in-up animations
+    - Input/TextArea: Glow effects on focus, scale transitions
+    - FileUpload: Vibrant gradients, enhanced animations, controlled state
+  - **Page updates**: All 5 pages (CreateReport, Explorer, Verify, Search, Timeline) updated with new vibrant gradient titles and modern animations
+  - **Navbar**: Updated with vibrant gradient logo and enhanced nav link animations
+  - **Accessibility**: Added prefers-reduced-motion support for animations
+  - **Removed** problematic @apply directives that caused Tailwind v4 errors
+  - Application running successfully on port 5000
 
 - 2025-11-21: Initial Replit setup
   - Installed Python 3.11 and Node.js 20
