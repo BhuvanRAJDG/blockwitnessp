@@ -22,12 +22,12 @@ export default function Timeline() {
   }
 
   return (
-    <div className="max-w-5xl mx-auto space-y-6 animate-slide-up">
+    <div className="max-w-5xl mx-auto space-y-6 animate-fade-in-up">
       <div className="text-center space-y-3">
-        <h1 className="text-4xl font-bold bg-gradient-to-r from-primary-600 via-accent-600 to-primary-600 bg-clip-text text-transparent animate-fade-in">
+        <h1 className="text-5xl font-extrabold bg-gradient-to-r from-primary-500 via-secondary-500 to-accent-500 bg-clip-text text-transparent">
           Chain Timeline
         </h1>
-        <p className="text-dark-600 text-lg">
+        <p className="text-dark-600 text-lg font-medium">
           Complete chronological history of all blocks and transactions
         </p>
       </div>
@@ -53,12 +53,12 @@ export default function Timeline() {
         </Card>
       ) : (
         <div className="relative">
-          <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary-500 via-accent-500 to-primary-500"></div>
+          <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary-500 via-secondary-500 to-accent-500"></div>
 
           <div className="space-y-8">
             {blocks.map((b, idx) => (
               <div key={b.idx} className="relative pl-20 animate-fade-in" style={{ animationDelay: `${idx * 0.1}s` }}>
-                <div className="absolute left-0 top-0 w-16 h-16 bg-gradient-to-br from-primary-500 to-accent-500 rounded-2xl flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-primary-500/30 border-4 border-white z-10">
+                <div className="absolute left-0 top-0 w-16 h-16 bg-gradient-to-br from-primary-500 via-secondary-500 to-accent-500 rounded-2xl flex items-center justify-center text-white font-bold text-lg shadow-glow border-4 border-white z-10">
                   {b.idx}
                 </div>
 

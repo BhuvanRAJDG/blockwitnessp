@@ -23,6 +23,8 @@ try:
 except Exception:
     # reportlab may not be installed
     canvas = None
+    A4 = None
+    ImageReader = None
 
 BASE_DIR = Path(__file__).parent
 UPLOAD_DIR = BASE_DIR / "uploads"
@@ -380,7 +382,7 @@ def report_certificate(report_id):
     conn.close()
 
     # Prepare PDF in-memory
-    if canvas is None:
+    if canvas is None or A4 is None or ImageReader is None:
         # reportlab not installed; return JSON describing certificate
         return jsonify({
             "warning": "reportlab not installed on server; install reportlab to enable PDF generation",
@@ -427,7 +429,7 @@ def report_certificate(report_id):
     # Add a block of metadata text
     desc = report.get("metadata", {}).get("description", "")
     cpdf.setFont("Helvetica", 10)
-    text = cpdf.beginText(260, thumb_y + 100)
+    text = cpdf.beginText(260, int(thumb_y + 100))
     text.textLines(f"Description: {desc}\n\nThis certificate proves the report was recorded in the local BlockWitness ledger. Verify at the BlockWitness Explorer using the block hash or the report ID.")
     cpdf.drawText(text)
 

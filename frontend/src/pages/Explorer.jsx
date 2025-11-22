@@ -93,13 +93,13 @@ export default function Explorer() {
   }
 
   return (
-    <div className="space-y-6 animate-fade-in">
+    <div className="space-y-6 animate-fade-in-up">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-primary-600 via-accent-600 to-primary-600 bg-clip-text text-transparent">
+          <h1 className="text-5xl font-extrabold bg-gradient-to-r from-primary-500 via-secondary-500 to-accent-500 bg-clip-text text-transparent">
             Block Explorer
           </h1>
-          <p className="text-dark-600 mt-2">
+          <p className="text-dark-600 mt-2 text-lg font-medium">
             Explore the blockchain and verify evidence integrity
           </p>
         </div>

@@ -35,12 +35,12 @@ export default function Verify() {
   const isVerified = result?.found;
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8 animate-slide-up">
+    <div className="max-w-4xl mx-auto space-y-8 animate-fade-in-up">
       <div className="text-center space-y-3">
-        <h1 className="text-4xl font-bold bg-gradient-to-r from-primary-600 via-accent-600 to-primary-600 bg-clip-text text-transparent animate-fade-in">
+        <h1 className="text-5xl font-extrabold bg-gradient-to-r from-primary-500 via-secondary-500 to-accent-500 bg-clip-text text-transparent">
           Verify Evidence
         </h1>
-        <p className="text-dark-600 text-lg">
+        <p className="text-dark-600 text-lg font-medium">
           Check if your file exists in the blockchain and verify its authenticity
         </p>
       </div>

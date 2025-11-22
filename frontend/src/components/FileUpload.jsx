@@ -88,10 +88,10 @@ export default function FileUpload({
       <div
         className={`
           relative border-2 border-dashed rounded-2xl p-8
-          transition-all duration-300 cursor-pointer
+          transition-all duration-500 cursor-pointer
           ${dragActive 
-            ? 'border-primary-500 bg-primary-50/50 scale-105' 
-            : 'border-dark-300 hover:border-primary-400 hover:bg-dark-50/50'
+            ? 'border-primary-500 bg-gradient-to-br from-primary-50 to-secondary-50 scale-105 shadow-glow' 
+            : 'border-dark-300 hover:border-primary-400 hover:bg-gradient-to-br hover:from-primary-50/30 hover:to-secondary-50/30 hover:scale-[1.02]'
           }
         `}
         onDragEnter={handleDrag}
@@ -110,7 +110,7 @@ export default function FileUpload({
         />
         
         <div className="flex flex-col items-center text-center space-y-4">
-          <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-accent-500 rounded-2xl flex items-center justify-center shadow-lg shadow-primary-500/30 animate-float">
+          <div className="w-16 h-16 bg-gradient-to-br from-primary-500 via-secondary-500 to-accent-500 rounded-2xl flex items-center justify-center shadow-glow animate-float">
             <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
             </svg>
@@ -138,9 +138,9 @@ export default function FileUpload({
             Selected Files ({files.length})
           </p>
           {files.map((file, index) => (
-            <div key={index} className="flex items-center justify-between p-3 bg-dark-50 rounded-xl border border-dark-200 group hover:bg-dark-100 transition-colors">
+            <div key={index} className="flex items-center justify-between p-3 bg-gradient-to-r from-primary-50/50 to-secondary-50/50 rounded-xl border border-primary-200/50 group hover:border-primary-300 hover:shadow-sm transition-all duration-300 animate-slide-up">
               <div className="flex items-center gap-3 flex-1 min-w-0">
-                <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 bg-gradient-to-br from-primary-500 via-secondary-500 to-accent-500 rounded-lg flex items-center justify-center flex-shrink-0 shadow-sm group-hover:shadow-glow transition-all duration-300">
                   <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                   </svg>
@@ -153,7 +153,7 @@ export default function FileUpload({
               <button
                 type="button"
                 onClick={(e) => { e.stopPropagation(); removeFile(index); }}
-                className="ml-3 p-2 text-dark-400 hover:text-danger-600 hover:bg-danger-50 rounded-lg transition-colors"
+                className="ml-3 p-2 text-dark-400 hover:text-danger-600 hover:bg-danger-50 rounded-lg transition-all duration-300 hover:scale-110 active:scale-95"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />

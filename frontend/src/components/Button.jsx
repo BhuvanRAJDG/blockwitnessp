@@ -9,21 +9,22 @@ export default function Button({
   className = '',
   ...props 
 }) {
-  const baseStyles = 'relative inline-flex items-center justify-center font-medium rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden group';
+  const baseStyles = 'relative inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden group btn-ripple';
   
   const variants = {
-    primary: 'bg-gradient-to-r from-primary-600 to-primary-500 text-white shadow-lg shadow-primary-500/30 hover:shadow-xl hover:shadow-primary-500/40 hover:scale-105 active:scale-95',
-    accent: 'bg-gradient-to-r from-accent-600 to-accent-500 text-white shadow-lg shadow-accent-500/30 hover:shadow-xl hover:shadow-accent-500/40 hover:scale-105 active:scale-95',
-    success: 'bg-gradient-to-r from-success-600 to-success-500 text-white shadow-lg shadow-success-500/30 hover:shadow-xl hover:shadow-success-500/40 hover:scale-105 active:scale-95',
-    ghost: 'bg-dark-100/50 hover:bg-dark-200/70 text-dark-700 backdrop-blur-sm border border-dark-200 hover:border-dark-300 hover:scale-105 active:scale-95',
-    outline: 'border-2 border-primary-500 text-primary-600 hover:bg-primary-50 hover:scale-105 active:scale-95',
-    danger: 'bg-gradient-to-r from-danger-600 to-danger-500 text-white shadow-lg shadow-danger-500/30 hover:shadow-xl hover:shadow-danger-500/40 hover:scale-105 active:scale-95',
+    primary: 'bg-gradient-primary text-white shadow-button hover:shadow-button-hover hover:scale-105 active:scale-95 hover:brightness-110',
+    secondary: 'bg-gradient-secondary text-white shadow-glow-secondary hover:shadow-glow-secondary hover:scale-105 active:scale-95 hover:brightness-110',
+    accent: 'bg-gradient-accent text-white shadow-glow-accent hover:shadow-glow-accent hover:scale-105 active:scale-95 hover:brightness-110',
+    success: 'bg-gradient-success text-white shadow-glow-success hover:shadow-glow-success hover:scale-105 active:scale-95 hover:brightness-110',
+    ghost: 'bg-dark-100/50 hover:bg-gradient-to-r hover:from-primary-500/10 hover:to-secondary-500/10 text-dark-700 backdrop-blur-sm border border-dark-200 hover:border-primary-400 hover:scale-105 active:scale-95',
+    outline: 'border-2 border-primary-500 text-primary-600 hover:bg-primary-50 hover:border-primary-600 hover:scale-105 active:scale-95',
+    danger: 'bg-gradient-to-r from-danger-600 to-danger-500 text-white shadow-lg shadow-danger-500/30 hover:shadow-xl hover:shadow-danger-500/40 hover:scale-105 active:scale-95 hover:brightness-110',
   };
   
   const sizes = {
-    sm: 'px-4 py-2 text-sm gap-2',
-    md: 'px-6 py-3 text-base gap-2',
-    lg: 'px-8 py-4 text-lg gap-3',
+    sm: 'px-5 py-2.5 text-sm gap-2',
+    md: 'px-7 py-3.5 text-base gap-2.5',
+    lg: 'px-9 py-4.5 text-lg gap-3',
   };
   
   return (
@@ -32,7 +33,7 @@ export default function Button({
       disabled={loading}
       {...props}
     >
-      <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></span>
+      <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/30 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></span>
       {loading ? (
         <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>

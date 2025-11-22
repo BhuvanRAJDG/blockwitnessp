@@ -25,12 +25,12 @@ export default function Search() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6 animate-slide-up">
+    <div className="max-w-4xl mx-auto space-y-6 animate-fade-in-up">
       <div className="text-center space-y-3">
-        <h1 className="text-4xl font-bold bg-gradient-to-r from-primary-600 via-accent-600 to-primary-600 bg-clip-text text-transparent animate-fade-in">
+        <h1 className="text-5xl font-extrabold bg-gradient-to-r from-primary-500 via-secondary-500 to-accent-500 bg-clip-text text-transparent">
           Search Reports
         </h1>
-        <p className="text-dark-600 text-lg">
+        <p className="text-dark-600 text-lg font-medium">
           Find reports by title, uploader, transaction ID, or block number
         </p>
       </div>

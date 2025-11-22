@@ -2,11 +2,22 @@
 
 @layer base {
   * {
-    @apply antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   html {
     scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    body {
+      animation: fadeIn 0.6s ease-out;
+    }
+    
+    button, a, input, textarea, select {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
   }
 }
 
@@ -18,5 +29,55 @@
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+
+  .glass {
+    @apply bg-white/10 backdrop-blur-md border border-white/20;
+  }
+
+  .glass-hover {
+    @apply hover:bg-white/20 hover:border-white/30;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary-500 via-secondary-500 to-accent-500 bg-clip-text text-transparent;
+  }
+
+  .gradient-border {
+    position: relative;
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(135deg, #06b6d4, #a855f7) border-box;
+    border: 2px solid transparent;
+  }
+
+  .btn-ripple {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-ripple::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  .btn-ripple:active::after {
+    width: 300px;
+    height: 300px;
+  }
+
+  .card-interactive {
+    @apply transform transition-all duration-300 hover:scale-[1.02] hover:shadow-card-hover;
+  }
+
+  .glow-on-hover {
+    @apply transition-all duration-300 hover:shadow-glow;
   }
 }
