@@ -36,6 +36,29 @@ BlockWitness is a blockchain-based evidence verification system that creates imm
 - React Router 7.9.6 (Navigation)
 - Tailwind CSS 4.1.17 (Styling)
 
+## Design System
+
+### Color Palette
+- **Primary**: Purple-blue gradient (#8B5CF6 to #6366F1)
+- **Accent**: Cyan (#06B6D4)
+- **Success**: Emerald (#10B981)
+- **Danger**: Red (#EF4444)
+- **Dark Grays**: 50-900 scale for typography and backgrounds
+
+### UI Components
+- **Button**: 4 variants (primary, secondary, success, danger) with hover effects, icons, and loading states
+- **Card**: Glass-morphism effects with backdrop blur and subtle borders
+- **Input/TextArea**: Modern focus states with ring effects and error handling
+- **Badge**: Compact pill design for tags and labels
+- **FileUpload**: Drag-and-drop with animated states and file previews
+
+### Design Principles
+- Glass-morphism effects with backdrop-blur
+- Smooth gradient backgrounds
+- 200-300ms transitions for micro-interactions
+- High contrast minimalist design
+- Inspired by Apple, Linear, and Notion aesthetics
+
 ## Development Setup
 
 ### Backend (Port 8000)
@@ -103,6 +126,16 @@ Configured for VM deployment:
 - Backend API on port 8000
 
 ## Recent Changes
+
+- 2025-11-22: Complete UI/UX Redesign
+  - Implemented modern design system with futuristic color palette
+  - Created comprehensive component library (Button, Card, Input, Badge, FileUpload)
+  - Redesigned all pages with glass-morphism effects and smooth animations
+  - Added micro-interactions and motion design throughout
+  - Implemented controlled FileUpload component with proper state management
+  - Fixed Merkle proof functionality in Explorer
+  - Enhanced file verification flow with proper reset behavior
+  - Applied Apple/Linear/Notion-inspired design principles
 
 - 2025-11-21: Initial Replit setup
   - Installed Python 3.11 and Node.js 20
