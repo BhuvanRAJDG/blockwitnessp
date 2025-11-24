@@ -1,5 +1,5 @@
 // frontend/src/api.js
-const API_BASE = "https://your-render-backend.onrender.com/api";
+const API_BASE = "https://your-render-backend.onrender.com";
 
 
 async function fetchJson(url, opts = {}) {
