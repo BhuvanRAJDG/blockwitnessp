@@ -1,5 +1,5 @@
 // frontend/src/api.js
-const API_BASE = "/api";
+const API_BASE = "https://blockwi.onrender.com/api";
 
 
 
