@@ -1,7 +1,7 @@
 // frontend/src/api.js
 const API_BASE = "https://blockwi.onrender.com/api";
 
-
+// to connect the backend with frontend you should paste the url of your backend here first
 
 async function fetchJson(url, opts = {}) {
   const res = await fetch(url, opts);
