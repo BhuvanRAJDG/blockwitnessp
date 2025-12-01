@@ -67,6 +67,18 @@ CORS(app)
 def home():
     return {"status": "Backend running with PostgreSQL 🎉"}
 
+
+
+@app.route("/db-test", methods=["GET"])
+def db_test():
+    try:
+        with engine.connect() as conn:
+            conn.execute(text("SELECT 1"))
+        return {"status": "Database Connected 🎉"}
+    except Exception as e:
+        return {"status": "Database Error", "message": str(e)}
+
+
 # Add block
 @app.route("/add_block", methods=["POST"])
 def add_block():
