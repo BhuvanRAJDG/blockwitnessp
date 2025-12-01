@@ -1,7 +1,7 @@
 import os
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Text
+from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Text, text
 from sqlalchemy.orm import sessionmaker, relationship, declarative_base
 from sqlalchemy.exc import SQLAlchemyError
 
