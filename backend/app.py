@@ -1,6 +1,8 @@
 # backend/app.py
 
 import os
+import qrcode
+from PIL import Image
 from flask import Flask, request, jsonify, send_file
 from flask_cors import CORS
 from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Text, text
@@ -82,9 +84,6 @@ def db_test():
     except Exception as e:
         return {"status": "Database Error", "message": str(e)}
 
-# -----------------------------
-# Generate certificate
-# -----------------------------
 @app.route("/generate_certificate", methods=["POST"])
 def generate_certificate():
     data = request.json
@@ -95,28 +94,111 @@ def generate_certificate():
     if not all([student_name, course, date]):
         return {"error": "Missing data"}, 400
 
-    # Create PDF certificate
+
+
+
+    # Ensure folder exists
     os.makedirs("certificates", exist_ok=True)
-    cert_file_path = os.path.join("certificates", f"{student_name}_certificate.pdf")
-    cert_content = f"Certificate of Completion\n\nStudent: {student_name}\nCourse: {course}\nDate: {date}"
 
-    pdf = FPDF()
+    cert_path = os.path.join("certificates", f"{student_name}_certificate.pdf")
+
+
+
+
+
+    # -----------------------------
+    # 1️⃣ Create QR code
+    # -----------------------------
+    qr_data = f"Student: {student_name}\nCourse: {course}\nDate: {date}"
+    qr_img = qrcode.make(qr_data)
+    qr_file = f"certificates/{student_name}_qr.png"
+    qr_img.save(qr_file)
+
+    # -----------------------------
+    # 2️⃣ Prepare PDF (fpdf2)
+    # -----------------------------
+    pdf = FPDF(orientation="L", unit="mm", format="A4")
     pdf.add_page()
-    pdf.set_font("Arial", size=16)
-    pdf.multi_cell(0, 10, cert_content)
-    pdf.output(cert_file_path)
 
-    # Hash PDF
-    with open(cert_file_path, "rb") as f:
-        pdf_bytes = f.read()
-    cert_hash = sha256_bytes(pdf_bytes)
+    # Background color
+    pdf.set_fill_color(245, 245, 245)
+    pdf.rect(0, 0, 297, 210, style="F")
 
-    # Sign hash
-    priv_key_path = os.path.join("keys", "issuer_priv.pem")
-    signature_hex = sign_hex(priv_key_path, cert_hash)
+    # Border
+    pdf.set_line_width(2)
+    pdf.rect(5, 5, 287, 200)
 
-    # Return PDF, hash, signature
-    return send_file(cert_file_path, as_attachment=True), 200
+    # -----------------------------
+    # 3️⃣ Add logo (optional)
+    # -----------------------------
+    logo_path = "static/logo.png"
+    if os.path.exists(logo_path):
+        pdf.image(logo_path, x=15, y=10, w=30)
+
+    # -----------------------------
+    # 4️⃣ Title
+    # -----------------------------
+    pdf.set_font("Helvetica", "B", 28)
+    pdf.set_xy(0, 30)
+    pdf.cell(0, 10, "CERTIFICATE OF COMPLETION", align="C")
+
+    # -----------------------------
+    # 5️⃣ Student details
+    # -----------------------------
+    pdf.set_font("Helvetica", size=18)
+    pdf.set_xy(0, 70)
+    pdf.cell(0, 10, f"This certificate is proudly presented to", align="C")
+
+    pdf.set_font("Helvetica", "B", 24)
+    pdf.set_xy(0, 90)
+    pdf.cell(0, 10, student_name, align="C")
+
+    pdf.set_font("Helvetica", size=18)
+    pdf.set_xy(0, 110)
+    pdf.cell(0, 10, f"For successfully completing: {course}", align="C")
+
+    pdf.set_xy(0, 130)
+    pdf.cell(0, 10, f"Date: {date}", align="C")
+
+    # -----------------------------
+    # 6️⃣ Add QR Code
+    # -----------------------------
+    pdf.image(qr_file, x=230, y=120, w=50)
+
+    # -----------------------------
+    # 7️⃣ Signature (optional)
+    # -----------------------------
+    sig_path = "static/signature.png"
+    if os.path.exists(sig_path):
+        pdf.image(sig_path, x=40, y=150, w=50)
+        pdf.set_xy(40, 175)
+        pdf.set_font("Helvetica", size=14)
+        pdf.cell(50, 5, "Authorized Signature", align="C")
+
+    # Save PDF
+    pdf.output(cert_path)
+
+    # -----------------------------
+    # 8️⃣ Blockchain Hash + Signature
+    # -----------------------------
+    with open(cert_path, "rb") as f:
+        file_bytes = f.read()
+
+    cert_hash = sha256_bytes(file_bytes)
+
+    private_key_path = "keys/issuer_priv.pem"
+    signature = sign_hex(private_key_path, cert_hash)
+
+    return {
+        "message": "Certificate generated",
+        "file_path": cert_path,
+        "hash": cert_hash.hex(),
+        "signature": signature
+    }, 200
+
+
+
+
 
 # -----------------------------
 # Add block
