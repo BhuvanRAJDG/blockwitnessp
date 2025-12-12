@@ -1,8 +1,7 @@
 // frontend/src/api.js
-const API_BASE = "https://blockwi.onrender.com/api";
+const API_BASE = "/api";
 
-// to connect the backend with frontend you should paste the url of your backend here first
-//successfullyworking
+// Using local proxy - configured in vite.config.js
 
 async function fetchJson(url, opts = {}) {
   const res = await fetch(url, opts);
@@ -72,5 +71,41 @@ export async function getTimeline() {
 
 export async function verifyChain() {
   const res = await fetchJson(`${API_BASE}/chain/verify`);
+  return res.json();
+}
+
+// -----------------
+// AUTH
+// -----------------
+export async function register(email, username, password) {
+  const res = await fetchJson(`${API_BASE}/auth/register`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, username, password })
+  });
+  return res.json();
+}
+
+export async function login(email, password) {
+  const res = await fetchJson(`${API_BASE}/auth/login`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password })
+  });
+  return res.json();
+}
+
+export async function logout() {
+  const res = await fetchJson(`${API_BASE}/auth/logout`, { method: "POST" });
+  return res.json();
+}
+
+export async function getCurrentUser() {
+  const res = await fetch(`${API_BASE}/auth/me`);
+  return res.json();
+}
+
+export async function getGoogleAuthUrl() {
+  const res = await fetchJson(`${API_BASE}/auth/google`);
   return res.json();
 }

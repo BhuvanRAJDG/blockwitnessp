@@ -1,8 +1,7 @@
 #!/bin/bash
 
 # Start the Flask backend on port 8000
-cd backend && python -c "from app import init_db; init_db()" && cd ..
-python -m flask --app backend.app run --host=0.0.0.0 --port=8000 &
+cd backend && python app.py &
 BACKEND_PID=$!
 
 # Wait a moment for backend to initialize
