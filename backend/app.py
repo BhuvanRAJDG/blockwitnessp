@@ -281,27 +281,45 @@ def google_callback():
 def create_report():
     title = request.form.get("title")
     description = request.form.get("description", "")
-    file = request.files.get("file")
+    uploader = request.form.get("uploader", "anonymous")
     
-    if not title or not file:
-        return jsonify({"error": "Title and file are required"}), 400
+    files = request.files.getlist("files")
+    if not files:
+        file = request.files.get("file")
+        if file:
+            files = [file]
     
-    file_bytes = file.read()
-    file_hash = sha256_bytes(file_bytes)
+    if not title or not files:
+        return jsonify({"error": "Title and at least one file are required"}), 400
+    
+    evidence_list = []
+    all_hashes = []
+    
+    for f in files:
+        file_bytes = f.read()
+        file_hash = sha256_bytes(file_bytes)
+        all_hashes.append(file_hash)
+        evidence_list.append({
+            "filename": f.filename,
+            "hash": file_hash
+        })
+    
+    merkle = merkle_root(all_hashes) if len(all_hashes) > 1 else all_hashes[0]
     
     private_key_path = os.path.join(os.path.dirname(__file__), "keys", "issuer_priv.pem")
-    signature = sign_hex(private_key_path, file_hash)
+    signature = sign_hex(private_key_path, merkle)
     
     with SessionLocal() as db_session:
         blocks = db_session.query(Block).all()
-        block_index = len(blocks) + 1
         
         previous_hash = blocks[-1].block_hash if blocks else "0" * 64
         
         block_data = json.dumps({
             "title": title,
             "description": description,
-            "file_hash": file_hash,
+            "uploader": uploader,
+            "evidence": evidence_list,
+            "merkle_root": merkle,
             "signature": signature,
             "timestamp": datetime.utcnow().isoformat()
         })
@@ -312,30 +330,33 @@ def create_report():
             block_hash=block_hash,
             previous_hash=previous_hash,
             data=block_data,
-            merkle_root=file_hash
+            merkle_root=merkle
         )
         db_session.add(new_block)
         db_session.commit()
         db_session.refresh(new_block)
         
         user_id = current_user.id if current_user.is_authenticated else None
-        report = Report(
-            user_id=user_id,
-            title=title,
-            description=description,
-            file_hash=file_hash,
-            signature=signature,
-            block_index=new_block.id
-        )
-        db_session.add(report)
+        
+        for ev in evidence_list:
+            report = Report(
+                user_id=user_id,
+                title=title,
+                description=description,
+                file_hash=ev["hash"],
+                signature=signature,
+                block_index=new_block.id
+            )
+            db_session.add(report)
+        
         db_session.commit()
-        db_session.refresh(report)
         
         return jsonify({
             "message": "Report created and added to blockchain",
-            "report_id": report.id,
+            "report_id": new_block.id,
             "block_index": new_block.id,
-            "hash": file_hash,
+            "merkle_root": merkle,
+            "evidence": evidence_list,
             "signature": signature
         }), 201
 
@@ -497,22 +518,25 @@ def verify_file():
         
         if report:
             block = db_session.query(Block).get(report.block_index) if report.block_index else None
+            block_data = json.loads(block.data) if block and block.data else {}
+            
             return jsonify({
+                "found": True,
                 "verified": True,
                 "message": "File is verified and exists on the blockchain",
-                "report": {
-                    "id": report.id,
+                "match": {
+                    "hash": file_hash,
+                    "report_id": report.id,
                     "title": report.title,
                     "block_index": report.block_index,
-                    "created_at": report.created_at.isoformat() if report.created_at else None
-                },
-                "block": {
-                    "hash": block.block_hash if block else None,
-                    "timestamp": block.timestamp.isoformat() if block and block.timestamp else None
+                    "uploader": block_data.get("uploader", "Unknown"),
+                    "timestamp": block.timestamp.isoformat() if block and block.timestamp else None,
+                    "merkle_root": block.merkle_root if block else None
                 }
             })
         
         return jsonify({
+            "found": False,
             "verified": False,
             "message": "File not found in blockchain",
             "hash": file_hash
