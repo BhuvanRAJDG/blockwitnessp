@@ -278,10 +278,11 @@ def google_callback():
 
 # Report Routes
 @app.route("/api/report", methods=["POST"])
+@login_required
 def create_report():
     title = request.form.get("title")
     description = request.form.get("description", "")
-    uploader = request.form.get("uploader", "anonymous")
+    uploader = current_user.username if current_user.is_authenticated else "anonymous"
     
     files = request.files.getlist("files")
     if not files:
@@ -336,7 +337,7 @@ def create_report():
         db_session.commit()
         db_session.refresh(new_block)
         
-        user_id = current_user.id if current_user.is_authenticated else None
+        user_id = current_user.id
         
         for ev in evidence_list:
             report = Report(
@@ -433,14 +434,19 @@ def download_certificate(report_id):
 def explorer():
     with SessionLocal() as db_session:
         blocks = db_session.query(Block).order_by(Block.id.desc()).all()
-        return jsonify([{
-            "id": b.id,
-            "block_hash": b.block_hash,
-            "previous_hash": b.previous_hash,
-            "merkle_root": b.merkle_root,
-            "timestamp": b.timestamp.isoformat() if b.timestamp else None,
-            "transaction_count": len(b.transactions)
-        } for b in blocks])
+        result = []
+        for b in blocks:
+            block_data = json.loads(b.data) if b.data else {}
+            evidence = block_data.get("evidence", [])
+            result.append({
+                "idx": b.id,
+                "block_hash": b.block_hash,
+                "previous_hash": b.previous_hash,
+                "merkle_root": b.merkle_root,
+                "timestamp": b.timestamp.isoformat() if b.timestamp else None,
+                "tx_count": len(evidence)
+            })
+        return jsonify(result)
 
 
 @app.route("/api/block/<int:idx>", methods=["GET"])
@@ -450,21 +456,31 @@ def get_block(idx):
         if not block:
             return jsonify({"error": "Block not found"}), 404
         
+        block_data = json.loads(block.data) if block.data else {}
+        evidence = block_data.get("evidence", [])
+        
+        reports = db_session.query(Report).filter_by(block_index=block.id).all()
+        report_map = {r.file_hash: r.id for r in reports}
+        
+        transactions = []
+        for ev in evidence:
+            report_id = report_map.get(ev.get("hash"), None)
+            transactions.append({
+                "tx_id": ev.get("hash", "")[:16],
+                "title": block_data.get("title", "Untitled"),
+                "uploader": block_data.get("uploader", "Unknown"),
+                "report_id": report_id,
+                "hash": ev.get("hash", ""),
+                "filename": ev.get("filename", "")
+            })
+        
         return jsonify({
-            "id": block.id,
+            "idx": block.id,
             "block_hash": block.block_hash,
             "previous_hash": block.previous_hash,
             "merkle_root": block.merkle_root,
-            "data": block.data,
-            "metadata": block.block_metadata,
             "timestamp": block.timestamp.isoformat() if block.timestamp else None,
-            "transactions": [{
-                "id": tx.id,
-                "sender": tx.sender,
-                "receiver": tx.receiver,
-                "amount": tx.amount,
-                "tx_hash": tx.tx_hash
-            } for tx in block.transactions]
+            "transactions": transactions
         })
 
 
@@ -505,6 +521,7 @@ def get_merkle_proof(idx):
 
 # Verify Route
 @app.route("/api/verify", methods=["POST"])
+@login_required
 def verify_file():
     file = request.files.get("file")
     if not file:
@@ -548,12 +565,24 @@ def verify_file():
 def get_timeline():
     with SessionLocal() as db_session:
         blocks = db_session.query(Block).order_by(Block.timestamp.desc()).limit(20).all()
-        return jsonify([{
-            "id": b.id,
-            "block_hash": b.block_hash[:16] + "...",
-            "timestamp": b.timestamp.isoformat() if b.timestamp else None,
-            "data_preview": b.data[:100] + "..." if b.data and len(b.data) > 100 else b.data
-        } for b in blocks])
+        result = []
+        for b in blocks:
+            block_data = json.loads(b.data) if b.data else {}
+            evidence = block_data.get("evidence", [])
+            transactions = []
+            for ev in evidence:
+                transactions.append({
+                    "tx_id": ev.get("hash", "")[:16],
+                    "title": block_data.get("title", "Untitled"),
+                    "uploader": block_data.get("uploader", "Unknown")
+                })
+            result.append({
+                "idx": b.id,
+                "block_hash": b.block_hash,
+                "timestamp": b.timestamp.isoformat() if b.timestamp else None,
+                "transactions": transactions
+            })
+        return jsonify(result)
 
 
 @app.route("/api/chain/verify", methods=["GET"])

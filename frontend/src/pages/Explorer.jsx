@@ -129,9 +129,9 @@ export default function Explorer() {
               <p className="text-dark-500">No blocks yet. Create a report to start the chain.</p>
             </Card>
           ) : (
-            blocks.map(b => (
+            blocks.map((b, index) => (
               <Card
-                key={b.idx}
+                key={b.idx || index}
                 hover
                 className={`p-4 cursor-pointer transition-all duration-300 ${
                   detail?.idx === b.idx 

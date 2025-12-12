@@ -57,7 +57,7 @@ export default function Timeline() {
 
           <div className="space-y-8">
             {blocks.map((b, idx) => (
-              <div key={b.idx} className="relative pl-20 animate-fade-in" style={{ animationDelay: `${idx * 0.1}s` }}>
+              <div key={b.idx || idx} className="relative pl-20 animate-fade-in" style={{ animationDelay: `${idx * 0.1}s` }}>
                 <div className="absolute left-0 top-0 w-16 h-16 bg-gradient-to-br from-primary-500 via-secondary-500 to-accent-500 rounded-2xl flex items-center justify-center text-white font-bold text-lg shadow-glow border-4 border-white z-10">
                   {b.idx}
                 </div>
