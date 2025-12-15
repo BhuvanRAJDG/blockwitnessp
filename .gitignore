@@ -11,3 +11,7 @@ frontend/dist/
 # OS junk
 .DS_Store
 Thumbs.db
+
+*.log
+install_log.txt
+backend_err.log
