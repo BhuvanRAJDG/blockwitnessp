@@ -6,12 +6,14 @@ import Verify from "./pages/Verify";
 import Search from "./pages/Search";
 import Timeline from "./pages/Timeline";
 import Login from "./pages/Login";
+import Home from "./pages/Home";
+import Footer from "./components/Footer";
 import { getCurrentUser, logout } from "./api";
 
 function NavLink({ to, children, icon }) {
   const location = useLocation();
   const isActive = location.pathname === to;
-  
+
   return (
     <Link
       to={to}
@@ -19,8 +21,8 @@ function NavLink({ to, children, icon }) {
         relative px-4 py-2.5 rounded-xl font-semibold text-sm
         transition-all duration-300 flex items-center gap-2
         group overflow-hidden
-        ${isActive 
-          ? 'text-white bg-gradient-primary shadow-button scale-105' 
+        ${isActive
+          ? 'text-white bg-gradient-primary shadow-button scale-105'
           : 'text-dark-300 hover:text-neon-cyan hover:bg-dark-800/50 hover:scale-105 hover:shadow-glow'
         }
         active:scale-95
@@ -49,11 +51,11 @@ function AppContent({ user, setUser }) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-mesh bg-dark-950 animate-fade-in">
+    <div className="min-h-screen bg-gradient-mesh bg-dark-950 animate-fade-in flex flex-col">
       <nav className="sticky top-0 z-50 bg-dark-900/80 backdrop-blur-xl border-b border-primary-800/20 shadow-lg">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3 group cursor-pointer">
+            <Link to="/" className="flex items-center gap-3 group cursor-pointer">
               <div className="w-11 h-11 bg-gradient-to-br from-primary-500 via-secondary-500 to-accent-500 rounded-xl flex items-center justify-center shadow-glow transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 group-hover:shadow-glow-lg">
                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
@@ -65,17 +67,17 @@ function AppContent({ user, setUser }) {
                 </h1>
                 <p className="text-xs text-dark-400 font-medium">Tamper-Proof Evidence Recorder</p>
               </div>
-            </div>
-            
+            </Link>
+
             <div className="flex items-center gap-2">
               {user ? (
                 <>
-                  <NavLink to="/" icon={
+                  <NavLink to="/create" icon={
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                     </svg>
                   }>
-                    Create
+                    Record
                   </NavLink>
                   <NavLink to="/explorer" icon={
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -131,14 +133,17 @@ function AppContent({ user, setUser }) {
         </div>
       </nav>
 
-      <main className="max-w-7xl mx-auto px-6 py-8 animate-fade-in">
+      <main className="flex-grow max-w-7xl mx-auto w-full px-6 py-8 animate-fade-in relative z-0">
         <Routes>
           <Route path="/login" element={
             user ? <Navigate to="/" /> : <Login onLogin={setUser} />
           } />
-          <Route path="/" element={
+          <Route path="/create" element={
             user ? <CreateReport /> : <Navigate to="/login" />
           } />
+          {/* Public Home Page */}
+          <Route path="/" element={<Home />} />
+
           <Route path="/explorer" element={
             user ? <Explorer /> : <Navigate to="/login" />
           } />
@@ -153,6 +158,8 @@ function AppContent({ user, setUser }) {
           } />
         </Routes>
       </main>
+
+      <Footer />
     </div>
   );
 }
